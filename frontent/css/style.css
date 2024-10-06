@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     padding: 20px;
 }
 
@@ -29,12 +29,14 @@ h1, h2 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
+    font-size: 1.8rem;
 }
 
 label {
     font-weight: 600;
     margin-bottom: 10px;
     display: block;
+    font-size: 1rem;
 }
 
 input[type="file"] {
@@ -43,6 +45,7 @@ input[type="file"] {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    font-size: 1rem;
 }
 
 button {
@@ -54,6 +57,7 @@ button {
     cursor: pointer;
     width: 100%;
     margin-top: 10px;
+    font-size: 1rem;
 }
 
 button:hover {
@@ -77,6 +81,7 @@ table, th, td {
 th, td {
     padding: 10px;
     text-align: center;
+    font-size: 1rem;
 }
 
 th {
@@ -90,6 +95,7 @@ td {
 
 #listaProcessosContainer h2, #graficoGanttContainer h2 {
     margin-bottom: 10px;
+    font-size: 1.5rem;
 }
 
 #graficoGanttContainer {
@@ -114,3 +120,54 @@ td {
     width: 40px;  
 }
 
+table th:first-child, table td:first-child {
+    width: 150px; 
+}
+
+@media (max-width: 768px) {
+    h1, h2 {
+        font-size: 1.5rem;
+    }
+
+    input[type="file"], button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    th, td {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    table th:first-child, table td:first-child {
+        width: 120px; 
+    }
+}
+
+@media (max-width: 480px) {
+    h1, h2 {
+        font-size: 1.3rem;
+    }
+
+    input[type="file"], button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    th, td {
+        padding: 6px;
+        font-size: 0.8rem;
+    }
+
+    table th:first-child, table td:first-child {
+        width: 100px;
+    }
+
+    table, th, td {
+        width: 100%;
+    }
+
+    td, th {
+        text-align: left;
+    }
+}
