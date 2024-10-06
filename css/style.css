@@ -13,7 +13,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px; 
+    padding: 20px;
 }
 
 .container {
@@ -68,14 +68,15 @@ button:hover {
 
 #listaProcessosContainer {
     margin-top: 20px;
-    max-height: 200px;  
-    overflow-y: auto;  
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 #listaProcessosContainer table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    overflow-y: auto;
 }
 
 table, th, td {
@@ -86,6 +87,7 @@ th, td {
     padding: 10px;
     text-align: center;
     font-size: 1rem;
+    white-space: nowrap;
 }
 
 th {
@@ -100,34 +102,42 @@ td {
 #listaProcessosContainer h2, #graficoGanttContainer h2 {
     margin-bottom: 10px;
     font-size: 1.5rem;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 2;
+    left: 0;
 }
 
 #graficoGanttContainer {
     overflow-x: auto;
     overflow-y: auto;
-    width: 100%; 
-    max-height: 300px; 
+    max-height: 300px;
+    width: 100%;
     margin-top: 20px;
 }
 
 #graficoGantt {
-    width: max-content;  
+    width: max-content;
     border-collapse: collapse;
 }
 
-#graficoGantt th, #graficoGantt td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
+#graficoGantt th:first-child, #graficoGantt td:first-child {
+    width: 100px;
+    position: sticky;
+    left: 0;
+    background-color: white;
+    z-index: 1;
+}
+
+#graficoGantt th:not(:first-child), #graficoGantt td:not(:first-child) {
+    min-width: 40px;
+    max-width: 40px;
+    width: 40px;
 }
 
 #graficoGantt td {
-    height: 40px;  
-    width: 40px;  
-}
-
-table th:first-child, table td:first-child {
-    width: 150px; 
+    height: 40px;
 }
 
 @media (max-width: 768px) {
@@ -166,7 +176,7 @@ table th:first-child, table td:first-child {
     }
 
     table th:first-child, table td:first-child {
-        width: 100px; 
+        width: 100px;
     }
 
     table, th, td {
