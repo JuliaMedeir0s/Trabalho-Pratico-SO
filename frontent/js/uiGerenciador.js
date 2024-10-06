@@ -1,81 +1,64 @@
-import { adicionarProcesso, listarProcessos } from './gerenciadorProcessos.js';
-import { escalonamentoRoundRobin } from './escalonador.js';
+import Process from './process.js';
 
-function lerArquivo(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-        const conteudo = e.target.result;
-        processarArquivo(conteudo);
-    };
-
-    if (file) {
-        reader.readAsText(file);
-    }
+export function readFile(event) {
+    return new Promise((resolve, reject) => {
+        const file = event.target.files[0];
+        const fr = new FileReader();
+        fr.onload = (e) => resolve(e.target.result);
+        fr.onerror = (err) => reject(err);
+        fr.readAsText(file);
+    });
 }
 
-function processarArquivo(conteudo) {
+export function processFile(conteudo) {
     const linhas = conteudo.split('\n');
-    linhas.forEach(linha => {
-        const [nome, tempoChegada, tempoExecucao] = linha.split(',');
+    const processos = [];
 
-        if (nome && tempoChegada && tempoExecucao) {
-            adicionarProcesso(nome.trim(), parseInt(tempoChegada), parseInt(tempoExecucao), 2);
+    linhas.forEach(linha => {
+        const [name, arrivalTime, executionTime] = linha.split(',');
+
+        if (name && arrivalTime && executionTime) {
+            const process = new Process(name.trim(), parseInt(executionTime), parseInt(arrivalTime));
+            processos.push(process);
         }
     });
 
-    exibirProcessos();
+    return processos;
 }
 
-// mostrar os processos na tabela
-function exibirProcessos() {
+export function showProcesses(processos) {
     const tabelaProcessos = document.querySelector('#listaProcessos tbody');
-    tabelaProcessos.innerHTML = ''; 
+    tabelaProcessos.innerHTML = '';
 
-    const processos = listarProcessos();
-    processos.forEach(processo => {
+    processos.forEach(process => {
         tabelaProcessos.innerHTML += `
             <tr>
-                <td>${processo.nome}</td>
-                <td>${processo.tempoChegada}</td>
-                <td>${processo.tempoExecucao}</td>
+                <td>${process.getName()}</td>
+                <td>${process.getArrivalTime()}</td>
+                <td>${process.getExecutionTime()}</td>
             </tr>
         `;
     });
 }
 
-// monta o gráfico de Gantt
-function exibirGraficoGantt(dadosGantt) {
-    const tabelaGantt = document.getElementById('graficoGantt');
-    tabelaGantt.innerHTML = ''; 
+export function showGanttChart(dadosGantt) {
+    const ganttChart = document.getElementById('graficoGantt');
+    ganttChart.innerHTML = '';
 
-    let linhaCabecalho = '<tr><th>Processo</th>';
-    const maxTempo = Math.max(...dadosGantt.map(p => p.linhaTempo.length));
-    for (let i = 0; i < maxTempo; i++) {
-        linhaCabecalho += `<th>${i + 1}</th>`; 
+    let header = '<tr><th>Processo</th>';
+    const maxTime = Math.max(...dadosGantt.map(p => p.timeline.length));
+    for (let i = 0; i < maxTime; i++) {
+        header += `<th>${i + 1}</th>`;
     }
-    linhaCabecalho += '</tr>';
-    tabelaGantt.innerHTML += linhaCabecalho;
+    header += '</tr>';
+    ganttChart.innerHTML += header;
 
-    // uma linha pra cada processo
-    dadosGantt.forEach(processo => {
-        let linha = `<tr><td>${processo.nome}</td>`;
-        processo.linhaTempo.forEach(cor => {
-            linha += `<td style="background-color:${cor};"></td>`; 
+    dadosGantt.forEach(process => {
+        let row = `<tr><td>${process.name}</td>`;
+        process.timeline.forEach(cor => {
+            row += `<td style="background-color:${cor};"></td>`;
         });
-        linha += '</tr>';
-        tabelaGantt.innerHTML += linha;
+        row += '</tr>';
+        ganttChart.innerHTML += row;
     });
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-    // captura o evento de upload do arquivo
-    document.getElementById('fileInput').addEventListener('change', lerArquivo);
-
-    // inicia o escalonamento ao clicar no botão
-    document.getElementById('iniciarEscalonamento').addEventListener('click', function() {
-        const dadosGantt = escalonamentoRoundRobin();
-        exibirGraficoGantt(dadosGantt);
-    });
-});
