@@ -66,6 +66,7 @@ button:hover {
     background-color: #45a049;
 }
 
+/* TABALEA DE PROCESSOS */
 #listaProcessosContainer {
     margin-top: 20px;
     max-height: 200px;
@@ -139,6 +140,61 @@ td {
 #graficoGantt td {
     height: 40px;
 }
+/* MEMÓRIA VIRTUAL */
+#memoriaVirtualContainer {
+    margin-top: 20px;
+}
+
+#memoriaVirtual {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.frame {
+    border: 1px solid #ddd;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    background-color: #f9f9f9;
+}
+
+/* TABELA DE PÁGINAS */
+#tabelaPaginasContainer, #memoriaFisicaContainer, #memoriaVirtualContainer {
+    margin-top: 20px;
+}
+
+#memoriasContainer {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+#tabelaPaginas, #listaProcessos, #graficoGantt {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#tabelaPaginas th, #tabelaPaginas td,
+#listaProcessos th, #listaProcessos td,
+#graficoGantt th, #graficoGantt td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+/* MEMÓRIA FÍSICA */
+#memoriaFisica, #memoriaVirtual {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+
 
 @media (max-width: 768px) {
     h1, h2 {

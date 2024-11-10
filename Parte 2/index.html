@@ -1,50 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Round Robin</title>
+    <title>Simulador de Escalonamento com Memória Virtual</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
     <div class="container">
-        <h1>Simulador de Escalonamento - Round Robin</h1>
-
-        <!-- upload de arquivo -->
+        <h1>Simulador de Escalonamento - Round Robin com Memória Virtual</h1>
+    
+        <!-- Upload de arquivo e controle de simulação -->
         <label for="fileInput">Carregar arquivo de processos (.csv, .txt):</label>
         <input type="file" id="fileInput" accept=".txt,.csv">
-
-        <!-- tabela para listar os processos carregados -->
+        <button id="iniciarSimulacao">Iniciar Simulação</button>
+        <button id="proximoPasso" style="display: none;">Próximo Passo</button>
+        <button id="resetarSimulacao" style="display: none;">Resetar</button>
+    
+        <!-- Tabela de Processos -->
         <div id="listaProcessosContainer">
             <h2>Processos Carregados</h2>
             <table id="listaProcessos">
                 <thead>
-                    <tr>
-                        <th>Nome do Processo</th>
-                        <th>Hora de Chegada</th>
-                        <th>Tempo de Execução</th>
-                    </tr>
+                    <tr><th>Nome do Processo</th><th>Hora de Chegada</th><th>Tempo de Execução</th></tr>
                 </thead>
-                <tbody>
-                    <!-- carrega processos dinamicamente -->
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
-
-        <button id="iniciarEscalonamento">Iniciar Escalonamento</button>
-
-        <!-- exibe o gráfico de Gantt -->
+    
+        <!-- Tabela de Páginas -->
+        <div id="tabelaPaginasContainer">
+            <h2>Tabela de Páginas</h2>
+            <table id="tabelaPaginas">
+                <thead>
+                    <tr><th>Processo</th><th>Página</th><th>Quadro Alocado</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    
+        <!-- Memória Física e Memória Virtual -->
+        <div id="memoriasContainer">
+            <div id="memoriaFisicaContainer">
+                <h2>Memória Física</h2>
+                <div id="memoriaFisica"></div>
+            </div>
+            <div id="memoriaVirtualContainer">
+                <h2>Memória Virtual</h2>
+                <div id="memoriaVirtual"></div>
+            </div>
+        </div>
+    
+        <!-- Gráfico de Gantt -->
         <div id="graficoGanttContainer">
             <h2>Gráfico de Gantt</h2>
-            <table id="graficoGantt">
-                <!-- gráfico gerado dinamicamente -->
-            </table>
+            <table id="graficoGantt"></table>
         </div>
     </div>
+        
     <script src="js/memory.js"></script>
     <script src="js/main.js" type="module"></script>
 </body>
-
 </html>

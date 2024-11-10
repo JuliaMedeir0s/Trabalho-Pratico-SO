@@ -62,3 +62,46 @@ export function showGanttChart(dadosGantt) {
         ganttChart.innerHTML += row;
     });
 }
+
+export function showPageTable(processes, virtualMemory) {
+    const tabelaPaginas = document.getElementById('tabelaPaginas').querySelector('tbody');
+    tabelaPaginas.innerHTML = '';
+
+    processes.forEach(process => {
+        const pageCount = Math.ceil(process.getExecutionTime() / 10);
+        for (let i = 0; i < pageCount; i++) {
+            const page = virtualMemory.frames.find(frame => frame && frame.getProcessName() === process.getName() && frame.getPageNumber() === i);
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${process.getName()}</td>
+                <td>P${i}</td>
+                <td>${page ? "Quadro " + virtualMemory.frames.indexOf(page) : "Memória Virtual"}</td>
+            `;
+            tabelaPaginas.appendChild(row);
+        }
+    });
+}
+
+export function showPhysicalMemory(virtualMemory) {
+    const memoriaFisica = document.getElementById('memoriaFisica');
+    memoriaFisica.innerHTML = '';
+
+    virtualMemory.frames.forEach((frame, index) => {
+        const frameDiv = document.createElement('div');
+        frameDiv.classList.add('frame');
+        frameDiv.innerText = frame ? `${frame.getProcessName()} - P${frame.getPageNumber()}` : "Vazio";
+        memoriaFisica.appendChild(frameDiv);
+    });
+}
+
+export function showVirtualMemory(virtualMemory) {
+    const memoriaVirtual = document.getElementById('memoriaVirtual');
+    memoriaVirtual.innerHTML = '';
+
+    virtualMemory.pageQueue.forEach(page => {
+        const pageDiv = document.createElement('div');
+        pageDiv.classList.add('frame');
+        pageDiv.innerText = `${page.getProcessName()} - P${page.getPageNumber()}`;
+        memoriaVirtual.appendChild(pageDiv);
+    });
+}
