@@ -1,29 +1,26 @@
 export default class VirtualMemory {
-    constructor(frameCount) {
-        this.frames = Array(frameCount).fill(null); // Inicializa os quadros vazios
-        this.pageQueue = []; // Fila para o algoritmo FIFO
+    constructor() {
+        this.frames = []; // Inicializa os quadros vazios
     }
 
     addPage(page) {
-        if (this.isFull()) {
-            this.removePageFIFO();
-        }
-        const emptyFrameIndex = this.frames.indexOf(null);
-        this.frames[emptyFrameIndex] = page;
-        this.pageQueue.push(page);
+        this.frames.push(page);
     }
 
     removePageFIFO() {
-        const pageToRemove = this.pageQueue.shift();
-        const index = this.frames.indexOf(pageToRemove);
-        this.frames[index] = null;
+        const page = this.frames.shift();
+        return page;
     }
 
-    isFull() {
-        return this.frames.every(frame => frame !== null);
+    isEmpty() {
+        return this.frames.length === 0;
     }
 
-    containsPage(page) {
-        return this.frames.some(frame => frame && frame.getProcessName() === page.getProcessName() && frame.getPageNumber() === page.getPageNumber());
+    getFrames() {
+        return this.frames;
+    }
+
+    hasProcessPage(processName, pageNumber) {
+        return this.frames.some(page => page.getProcessName() === processName && page.getPageNumber() === pageNumber);
     }
 }

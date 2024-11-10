@@ -9,7 +9,6 @@ export default class System {
         let dadosGantt = processes.map(p => ({ name: p.getName(), timeline: [] }));
 
         while (processes.some(p => p.getExecutionTime() > 0) || this.memory.hasProcesses()) {
-            console.log(JSON.stringify(processes));
             const newProcesses = [];
 
             processes.forEach((process) => {

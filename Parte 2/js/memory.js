@@ -1,26 +1,34 @@
 export default class Memory {
-    constructor() {
-        this.processes = [];
+    constructor(frameCount) {
+        this.frames = [];
+        this.frameCount = frameCount;
     }
 
-    addProcess(process) {
-        this.processes.push(process);
+    addFrame(frame) {
+        this.frames.push(frame);
     }
 
-    addProcesses(processes) {
-        this.processes = this.processes.concat(processes);
+    getFrames() {
+        return this.frames;
     }
 
-    removeProcess(process) {
-        const index = this.processes.indexOf(process);
-        this.processes.splice(index, 1);
+    hasFrames() {
+        return this.frames.length > 0;
     }
 
-    getProcesses() {
-        return this.processes;
+    hasEmptyFrames() {
+        return this.frames.length < this.frameCount;
     }
 
-    hasProcesses() {
-        return this.processes.length > 0;
+    clear() {
+        this.frames = [];
+    }
+
+    hasProcessPage(processName, pageNumber) {
+        return this.frames.some(
+            (page) =>
+                page.getProcessName() === processName &&
+                page.getPageNumber() === pageNumber
+        );
     }
 }

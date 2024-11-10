@@ -1,23 +1,28 @@
 export default class Process {
-    constructor(name, executionTime, arrivalTime) {
+    constructor(name, size, arrivalTime) {
         this.name = name;
-        this.executionTime = executionTime;
+        this.size = size;
         this.arrivalTime = arrivalTime;
+        this.pages = [];
     }
 
     getName() {
         return this.name;
     }
 
-    getExecutionTime() {
-        return this.executionTime;
+    getSize() {
+        return this.size;
     }
 
     getArrivalTime() {
         return this.arrivalTime;
     }
 
-    setExecutionTime(executionTime) {
-        this.executionTime = executionTime;
+    setPages(pages) {
+        this.pages = pages;
+    }
+
+    getPages() {
+        return this.pages;
     }
 }
