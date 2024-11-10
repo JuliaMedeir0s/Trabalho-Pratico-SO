@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 1rem;
+}
+
+input[type="file"] {
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#listaProcessosContainer {
+    margin-top: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#listaProcessosContainer table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    overflow-y: auto;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: 600;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+#listaProcessosContainer h2, #graficoGanttContainer h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 2;
+    left: 0;
+}
+
+#graficoGanttContainer {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 300px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#graficoGantt {
+    width: max-content;
+    border-collapse: collapse;
+}
+
+#graficoGantt th:first-child, #graficoGantt td:first-child {
+    width: 100px;
+    position: sticky;
+    left: 0;
+    background-color: white;
+    z-index: 1;
+}
+
+#graficoGantt th:not(:first-child), #graficoGantt td:not(:first-child) {
+    min-width: 40px;
+    max-width: 40px;
+    width: 40px;
+}
+
+#graficoGantt td {
+    height: 40px;
+}
+
+@media (max-width: 768px) {
+    h1, h2 {
+        font-size: 1.5rem;
+    }
+
+    input[type="file"], button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    th, td {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    table th:first-child, table td:first-child {
+        width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1, h2 {
+        font-size: 1.3rem;
+    }
+
+    input[type="file"], button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    th, td {
+        padding: 6px;
+        font-size: 0.8rem;
+    }
+
+    table th:first-child, table td:first-child {
+        width: 100px;
+    }
+
+    table, th, td {
+        width: 100%;
+    }
+
+    td, th {
+        text-align: left;
+    }
+}
